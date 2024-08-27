@@ -1,32 +1,6 @@
-// src/components/LivroList.js
-import React, { useEffect, useState } from "react";
-import { getLivros, deleteLivro } from "../api";
+import React from "react";
 
-const LivroList = ({ onEdit }) => {
-  const [livros, setLivros] = useState([]);
-
-  useEffect(() => {
-    const fetchLivros = async () => {
-      try {
-        const response = await getLivros();
-        setLivros(response.data);
-      } catch (error) {
-        console.error("Erro ao buscar livros:", error);
-      }
-    };
-
-    fetchLivros();
-  }, []);
-
-  const handleDelete = async (id) => {
-    try {
-      await deleteLivro(id);
-      setLivros(livros.filter((livro) => livro._id !== id));
-    } catch (error) {
-      console.error("Erro ao deletar livro:", error);
-    }
-  };
-
+const LivroList = ({ livros, onEdit, onDelete }) => {
   return (
     <div>
       <h2>Lista de Livros</h2>
@@ -36,9 +10,9 @@ const LivroList = ({ onEdit }) => {
         ) : (
           livros.map((livro) => (
             <li key={livro._id}>
-              {livro.titulo} - {livro.autor}
+              <p>{livro.titulo} - {livro.autor} - {livro.ano}</p>
               <button onClick={() => onEdit(livro)}>Editar</button>
-              <button onClick={() => handleDelete(livro._id)}>Deletar</button>
+              <button onClick={() => onDelete(livro._id)}>Deletar</button>
             </li>
           ))
         )}
