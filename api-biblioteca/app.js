@@ -1,5 +1,4 @@
 const express = require("express");
-const bodyParser = require("body-parser");
 const cors = require("cors");
 const livroRoutes = require("./routes/livroRoutes");
 require("dotenv").config();
@@ -11,9 +10,7 @@ const app = express();
 // Middlewares
 // Configura o middleware CORS
 app.use(cors());
-app.use(bodyParser.json());
-
-
+app.use(express.json());
 
 // Rotas
 app.use("/livros", livroRoutes);
