@@ -58,8 +58,25 @@ function buscarLivros() {
     .catch((error) => console.error("Erro ao buscar livros:", error)); // Loga um erro em caso de falha
 }
 
+
 // Chama a função para buscar e renderizar os livros ao carregar a página
 window.onload = buscarLivros;
+
+// Preenche o formulário de atualização com os dados do livro existente
+if (window.location.pathname.includes("update.html")) {
+  const id = new URLSearchParams(window.location.search).get("id");
+  fetch(`${apiUrl}/${id}`)
+    .then((response) => response.json())
+    .then((livro) => {
+      document.getElementById("livroId").value = livro._id;
+      document.getElementById("titulo").value = livro.titulo;
+      document.getElementById("autor").value = livro.autor;
+      document.getElementById("ano").value = livro.ano;
+      document.getElementById("genero").value = livro.genero;
+    })
+    .catch((error) => console.error("Erro ao buscar livro:", error));
+}
+
 
 // Função para adicionar um novo livro
 function adicionarLivro(livro) {
@@ -88,17 +105,45 @@ document
     adicionarLivro(livro);
   });
 
-// Preenche o formulário de atualização com os dados do livro existente
-if (window.location.pathname.includes("update.html")) {
-  const id = new URLSearchParams(window.location.search).get("id");
-  fetch(`${apiUrl}/${id}`)
-    .then((response) => response.json())
-    .then((livro) => {
-      document.getElementById("livroId").value = livro._id;
-      document.getElementById("titulo").value = livro.titulo;
-      document.getElementById("autor").value = livro.autor;
-      document.getElementById("ano").value = livro.ano;
-      document.getElementById("genero").value = livro.genero;
-    })
-    .catch((error) => console.error("Erro ao buscar livro:", error));
+// Função para atualizar um livro
+
+function atualizarLivro(id, livro) {
+  // Atualizar livro existente
+  fetch(`${apiUrl}/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(livro),
+  })
+    .then(() => (window.location.href = "index.html"))
+    .catch((error) => console.error("Erro ao atualizar livro:", error));
 }
+
+document.getElementById("livroUp").addEventListener("submit", function (event) {
+  event.preventDefault();
+  const id = new URLSearchParams(window.location.search).get("id");
+  // const titulo = ;
+  // const autor = document.getElementById("autor").value;
+  // const ano = document.getElementById("ano").value;
+  // const genero = document.getElementById("genero").value;
+  const livro = {
+    titulo : document.getElementById("titulo").value,
+    autor: document.getElementById("autor").value,
+    ano : document.getElementById("ano").value,
+    genero: document.getElementById("genero").value
+  };
+
+  atualizarLivro(id, livro);
+});
+
+// Função para deletar um livro
+function deletarLivro(id) {
+    fetch(`${apiUrl}/${id}`, {
+        method: 'DELETE'
+    })
+    .then(() => buscarLivros())
+    .catch(error => console.error('Erro ao deletar livro:', error));
+}
+
+
+
+

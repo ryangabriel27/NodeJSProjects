@@ -52,38 +52,42 @@ exports.buscarLivroPorId = async (req, res) => {
 };
 
 // Atualizar um livro por ID
+// Atualizar um livro por ID
 exports.atualizarLivro = async (req, res) => {
-  try {
-    // Busca o livro pelo ID
-    const livro = await Livro.findById(req.params.id);
-    if (livro == null) {
-      // Se o livro não for encontrado, retorna status 404 (Não Encontrado)
-      return res.status(404).json({ message: "Livro não encontrado" });
-    }
+    try {
+        // Busca o livro pelo ID
+        const livro = await Livro.findById(req.params.id);
+        if (livro == null) {
+            // Se o livro não for encontrado, retorna status 404 (Não Encontrado)
+            return res.status(404).json({ message: 'Livro não encontrado' });
+        }
 
-    // Verifica quais campos foram enviados na requisição e os atualiza
-    if (req.body.titulo != null) {
-      livro.titulo = req.body.titulo;
-    }
-    if (req.body.autor != null) {
-      livro.autor = req.body.autor;
-    }
-    if (req.body.ano != null) {
-      livro.ano = req.body.ano;
-    }
-    if (req.body.genero != null) {
-      livro.genero = req.body.genero;
-    }
 
-    // Salva o livro atualizado no banco de dados
-    const livroAtualizado = await livro.save();
-    // Retorna o livro atualizado
-    res.json(livroAtualizado);
-  } catch (err) {
-    // Em caso de erro, retorna uma mensagem de erro com status 400 (Bad Request)
-    res.status(400).json({ message: err.message });
-  }
+        // Verifica quais campos foram enviados na requisição e os atualiza
+        if (req.body.titulo != null) {
+            livro.titulo = req.body.titulo;
+        }
+        if (req.body.autor != null) {
+            livro.autor = req.body.autor;
+        }
+        if (req.body.ano != null) {
+            livro.ano = req.body.ano;
+        }
+        if (req.body.genero != null) {
+            livro.genero = req.body.genero;
+        }
+
+
+        // Salva o livro atualizado no banco de dados
+        const livroAtualizado = await livro.save();
+        // Retorna o livro atualizado
+        res.json(livroAtualizado);
+    } catch (err) {
+        // Em caso de erro, retorna uma mensagem de erro com status 400 (Bad Request)
+        res.status(400).json({ message: err.message });
+    }
 };
+
 
 // Deletar um livro por ID
 exports.deletarLivro = async (req, res) => {

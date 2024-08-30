@@ -1,0 +1,53 @@
+
+ .content{
+    padding: 1.7em;
+ }
+
+
+ table {
+    margin-top: 1.7em;
+     width: 100%;
+     border-collapse: collapse;
+     border-radius: 8px;
+ }
+
+
+ th,
+ td {
+    border: 1px solid rgba(94, 7, 7, 0.115);
+     padding: 8px;
+     text-align: left;
+ }
+
+ th {
+     background-color: #742da0;
+     color: white;
+ }
+
+ tr {
+     background-color: #fcfcfc;
+ }
+
+ tr:hover {
+     background-color: #d4a7ff;
+     color: white;
+     transition: 0.4s;
+ }
+
+ .link-add{
+    width: 12em;
+    height: 5em;
+    background-color: rgb(117, 26, 148);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    padding: 1em;
+    margin-bottom: 2em;
+    margin-left: 1em;
+ }
+ .link-add:hover {
+    transform: scale(1.05);
+    transition: 0.4s;
+    background-color: rgb(133, 52, 192);
+
+ }
