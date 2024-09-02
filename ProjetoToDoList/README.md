@@ -22,6 +22,7 @@
 - ## 	Temporais:
     - ##### 	Desenvolver um protótipo funcional em 1 semana de projeto
 # •	Cronograma:
+- <img src="./img-doc/Diagrama de Gantt.png"/>
 - ## Planejamento e Preparação (1 Semana)
     - ### Reunião Inicial
         - #### Alinhar expectativas e objetivos com a equipe.
@@ -100,50 +101,14 @@
     - ##### Solução: Uso de boas práticas de programação para evitar que esses erro possam ocorrer
 # •	Diagramas de Desenvolvimento:
 
-## •	Diagrama de Classe:
-    Usuarios(
-        - nome
-        - senha
-        - email
-        - tipo [“medico”, “paciente”]
-        - cpf
-        - cidade
-        - estado
-        - cep
-        - crm 
-    )
-
-    Consultas(
-        - horario
-        - data
-        - especialidade
-        - medico (usuário_id)
-        - localidade
-    )
-
-	Agenda(
-        - paciente (usuário_id)
-        - consulta_id
-        - status
-    )
+## •	Diagrama de Classes:
+<img src="./img-doc/DiagramaClasse.png">
 
 ## •	Diagrama de Uso:
-- ### Paciente:
-    - #####  Pode buscar, marcar e verificar suas consultas marcadas
-
-- ### Médico:
-    - ##### Pode criar, editar ,apagar e verificar horários de suas consultas
+<img src="./img-doc/Diagrama de caso de uso.png">
 
 ## •	Diagrama de Fluxo:
-- ### Cadastro/Login → [Paciente] → Dashboard (Página interna)
-    - #### Procurar novas consultas para marca-las
-    - #### Ver suas consultas já marcadas
-
-- ### 	Cadastro/Login → [Médico] → Dashboard - Médico
-    - #### Verificar a agenda de horários
-    - #### Editar horários de consultas marcadas ou desmarcadas
-    - #### Excluir consultas marcadas ou desmarcadas
-    - #### Criar novos horários de consulta
+<img src="./img-doc/_Fluxograma.png">
 
 
 
