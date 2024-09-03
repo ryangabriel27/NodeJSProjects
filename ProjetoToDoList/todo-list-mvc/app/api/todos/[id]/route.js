@@ -1,15 +1,10 @@
-import connectMongo from "@/utils/mongodb";
-import Todo from "@/models/Todo";
+import { updateTodo, deleteTodo } from "@/controllers/TodoController";
 import { NextResponse } from "next/server";
 
 export async function PUT(req, { params }) {
-  await connectMongo();
   try {
     const data = await req.json();
-    const todo = await Todo.findByIdAndUpdate(params.id, data, {
-      new: true,
-      runValidators: true,
-    });
+    const todo = await updateTodo(params.id, data);
     if (!todo) {
       return NextResponse.json({ success: false }, { status: 400 });
     }
@@ -20,9 +15,8 @@ export async function PUT(req, { params }) {
 }
 
 export async function DELETE(req, { params }) {
-  await connectMongo();
   try {
-    const deletedTodo = await Todo.deleteOne({ _id: params.id });
+    const deletedTodo = await deleteTodo(params.id);
     if (!deletedTodo) {
       return NextResponse.json({ success: false }, { status: 400 });
     }

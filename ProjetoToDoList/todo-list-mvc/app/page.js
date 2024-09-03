@@ -36,24 +36,6 @@ export default function Home() {
     setTodos(todos.filter((todo) => todo._id !== id));
   };
 
-  const doneTodo = async (id) => {
-      await fetch(`/api/todos/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ completed: true }),
-      });
-      setTodos((prevTodos) =>
-        prevTodos.map((todo) =>
-          todo._id === id ? { ...todo, completed: true } : todo
-        )
-      );
-  };
-
-
-  console.log(todos);
-
   return (
     <div>
       <h1>To-Do List</h1>
@@ -66,9 +48,7 @@ export default function Home() {
       <ul>
         {todos.map((todo) => (
           <li key={todo._id}>
-            {todo.title} - {todo.completed ? "Concluída" : "Pendente"}
-
-            <button onClick={() => doneTodo(todo._id)}>Marcar como concluída</button>
+            {todo.title}
             <button onClick={() => deleteTodo(todo._id)}>Excluir</button>
           </li>
         ))}
