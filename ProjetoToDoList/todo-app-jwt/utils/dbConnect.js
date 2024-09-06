@@ -13,7 +13,7 @@ const connectMongo = async () => {
     return await mongoose
       .connect(databaseUrl)
       .then("MongoDb Conectado!")
-      .catch((err) => console.error(err), err);
+      .catch((err) => console.error(err));
   }
 };
 
